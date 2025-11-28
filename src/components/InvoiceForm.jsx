@@ -35,7 +35,7 @@ const InvoiceForm = ({ data, setData, computed }) => {
   };
 
   return (
-    <div className="w-[350px] p-5 bg-white shadow-lg rounded-xl">
+<div className="w-full p-5 bg-white shadow-lg rounded-xl md:sticky md:top-10">
       <h2 className="text-lg font-semibold mb-4">Invoice Form</h2>
 
       <input name="clientName" className="input" placeholder="Client Name" onChange={update} />

@@ -14,7 +14,11 @@ const InvoicePreview = ({ data, computed }) => {
   }
 
   return (
-    <div id="invoice" className="relative w-[600px] bg-white flex shadow-2xl overflow-hidden">
+<div 
+  id="invoice" 
+  className="relative w-[600px] max-w-full bg-white flex shadow-2xl overflow-hidden mx-auto"
+>
+
 
       {/* LEFT STRIP */}
       <div className="w-[32%] bg-black flex justify-center items-center overflow-hidden">

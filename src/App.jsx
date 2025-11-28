@@ -4,9 +4,9 @@ function App() {
 
 
   return (
-    <>
+    <main className="relative w-screen">
       <InvoiceGenerator />
-    </>
+    </main>
   )
 }
 
