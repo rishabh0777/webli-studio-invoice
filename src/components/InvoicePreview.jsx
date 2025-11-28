@@ -117,7 +117,7 @@ const InvoicePreview = ({ data, computed }) => {
           <p>Thank you for choosing Webli ⚡ Studio</p>
         </footer>
 
-        <div className="ml-auto w-[40px] mt-4">
+        <div className="ml-auto w-[40px] mt-4 drop-shadow">
           <img src="/logoIconTransparent.png" alt="icon" />
         </div>
 
