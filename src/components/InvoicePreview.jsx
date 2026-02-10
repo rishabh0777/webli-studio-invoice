@@ -23,7 +23,7 @@ const InvoicePreview = ({ data, computed }) => {
       {/* LEFT STRIP */}
       <div className="w-[32%] bg-black flex justify-center items-center overflow-hidden">
         <div className="-rotate-90">
-          <img src="/primaryLogoEnhanced.jpg" alt="webli" className="scale-[2.5] w-auto" />
+          <img src="/primaryLogoWhite.svg" alt="webli" className="scale-[2.5] w-auto" />
         </div>
       </div>
 
