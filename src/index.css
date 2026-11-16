@@ -1,30 +1,159 @@
 @import "tailwindcss";
 
-:root {
-  --tw-color-black: #000;
-  --tw-color-white: #fff;
-  --tw-color-gray-100: #f3f4f6;
-  --tw-color-gray-200: #e5e7eb;
-  --tw-color-gray-300: #d1d5db;
-  --tw-color-gray-400: #9ca3af;
-  --tw-color-gray-500: #6b7280;
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: "Instrument Serif", "Playfair Display", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-ink: #000000;
+  --color-paper: #ffffff;
+  --color-line: #e5e5e5;
+  --color-mist: #f8f8f8;
+
+  /* Hex equivalents of the default neutral scale — html2canvas cannot parse oklch() */
+  --color-neutral-300: #d4d4d4;
+  --color-neutral-400: #a3a3a3;
+  --color-neutral-500: #737373;
+  --color-neutral-600: #525252;
 }
 
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
 
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
 
-* {
-  font-family: "Inter", sans-serif;
+  body {
+    margin: 0;
+    background-color: var(--color-mist);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+    color: inherit;
+  }
+
+  ::selection {
+    background: #000;
+    color: #fff;
+  }
 }
 
-h1, h2, h3, h4, h5 {
-  font-family: "Sora", sans-serif;
+@layer components {
+  .field {
+    @apply w-full appearance-none rounded-none border border-line bg-paper px-3 py-2 text-[12.5px] leading-5 text-ink outline-none transition-colors placeholder:text-neutral-400 focus:border-ink;
+  }
+
+  .field-label {
+    @apply mb-1.5 block font-mono text-[8.5px] uppercase tracking-[0.18em] text-neutral-500;
+  }
+
+  .editor-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: #d4d4d4 transparent;
+  }
+
+  .editor-scroll::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .editor-scroll::-webkit-scrollbar-thumb {
+    background: #d4d4d4;
+  }
+
+  .editor-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
 }
 
-.input {
-  @apply w-full p-2 border rounded-lg mb-3 outline-none focus:ring-2 focus:ring-black;
+/* ── A4 receipt sheet ───────────────────────────────────────────────── */
+
+.a4-sheet {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 16mm 18mm 14mm;
+  overflow: hidden;
+  background: #ffffff;
+  color: #000000;
+  box-shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.32);
 }
 
-.drop-shadow {
-  filter: drop-shadow(3px 0px 2px #000)
+/* ── Print: only the receipt sheet, exactly one A4 page ─────────────── */
+
+@page {
+  size: A4 portrait;
+  margin: 0;
 }
 
+@media print {
+  html,
+  body {
+    width: 210mm;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .app-shell {
+    display: block !important;
+    min-height: 0 !important;
+    background: #ffffff !important;
+  }
+
+  .preview-pane {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: #ffffff !important;
+  }
+
+  .sheet-viewport {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  .sheet-frame {
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+  }
+
+  .sheet-transform {
+    transform: none !important;
+  }
+
+  .a4-sheet {
+    margin: 0 !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .a4-sheet tr,
+  .a4-sheet section {
+    break-inside: avoid;
+  }
+}
